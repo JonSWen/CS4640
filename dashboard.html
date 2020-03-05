@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="dashboard-styles.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+    <script src="./dashboard.js"></script>
 </head>
 
 <body>
@@ -20,7 +21,7 @@
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
         <a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
-        <a class="nav-item nav-link" href="#">Profile</a>
+        <a class="nav-item nav-link" href="personalinfo.html">Profile</a>
         <a class="nav-item nav-link" href="#">Settings</a>
         <a class="nav-item nav-link" href="#">Contact Us</a>
         </div>
@@ -41,7 +42,7 @@
 <p>Goal: 2000cal &nbsp; &nbsp; Goal weight: 140lb</p>
 
 <div class="row">
-    <div class="col-6">
+    <div class="col-6" id="stats">
         <ul class="list-group">
            <!--Need to figure this part out!-->
             <li class="list-group-item">Carbohydrates: &nbsp; 33% &nbsp; 30%</li>
@@ -64,29 +65,29 @@
 
 <div class="container card card-body" style="margin-top: 40px; margin-bottom: 50px;">
     <h5>Today's Exercise</h5>
-    <div class="row container">
-        <div class="col-3">Calories
+    <div class="row container" id="test">
+        <div class="col-3" id="chart1">Calories
         <canvas id="chartjs-3" class="chartjs" style="display: block; height: 187px; width: 374px;"></canvas>
         <script>
             new Chart(document.getElementById("chartjs-3"),{"type":"doughnut","data":{"labels":["Calories"],"datasets":[{"label":"My First Dataset","data":[120, 240],"backgroundColor":["rgb(255, 99, 132)","rgb(54, 162, 235)","rgb(255, 205, 86)"]}]}});
         </script>
         </div>
         
-        <div class="col-3">Steps
+        <div class="col-3" id="chart2">Steps
         <canvas id="chartjs-2" class="chartjs" style="display: block; height: 187px; width: 374px;"></canvas>
         <script>
             new Chart(document.getElementById("chartjs-2"),{"type":"doughnut","data":{"labels":["Steps"],"datasets":[{"label":"My First Dataset","data":[120, 240],"backgroundColor":["rgb(255, 99, 132)","rgb(54, 162, 235)","rgb(255, 205, 86)"]}]}});
         </script>
         </div>
         
-        <div class="col-3">Distance (miles)
+        <div class="col-3" id="chart3">Distance (miles)
         <canvas id="chartjs-1" class="chartjs" style="display: block; height: 187px; width: 374px;"></canvas>
         <script>
             new Chart(document.getElementById("chartjs-1"),{"type":"doughnut","data":{"labels":["Miles"],"datasets":[{"label":"My First Dataset","data":[120, 240],"backgroundColor":["rgb(255, 99, 132)","rgb(54, 162, 235)","rgb(255, 205, 86)"]}]}});
         </script>
         </div>
         
-        <div class="col-3">Active Minutes
+        <div class="col-3" id="chart4">Active Minutes
         <canvas id="chartjs-5" class="chartjs" style="display: block; height: 187px; width: 374px;"></canvas>
         <script>
             new Chart(document.getElementById("chartjs-5"),{"type":"doughnut","data":{"labels":["Minutes"],"datasets":[{"label":"My First Dataset","data":[120, 240],"backgroundColor":["rgb(255, 99, 132)","rgb(54, 162, 235)","rgb(255, 205, 86)"]}]}});
@@ -94,6 +95,11 @@
         </div>
     </div>
 </div>
+
+<button id="myBtn">Change Display</button>
+<script>
+    document.getElementById("myBtn").addEventListener("click", changeDisplay);
+</script>
 
 
 </body>
