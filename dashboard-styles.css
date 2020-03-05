@@ -7,3 +7,19 @@
     margin-left: 45%;
     margin-bottom: 40px;
 }
+
+/* MEDIA QUERIES */
+
+@media only screen and (max-width: 600px) {
+    #dashboard-title {
+        font-size: 14px;
+    }
+
+    #exercise-title {
+        font-size: 14px;
+    }
+
+    #navbar {
+        background-color: lightblue;
+    }
+}
