@@ -1,3 +1,5 @@
+//Created by Margaret Chen (mdc5bv), working with Jonathan Wen (jsw2dg) on CS4640 Web PL project
+
 const changeDisplay = () => {
     let charts = Array.from(document.getElementsByClassName("col-3"));
     // kinda random number, know there's more than 2
@@ -22,6 +24,3 @@ const changeDisplay = () => {
     test = document.getElementById("test");
     test.className = "container";
 }
-
-//give each an ID and manually set style or change width
-//reload but give current DOM? 
