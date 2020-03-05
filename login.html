@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<head>
+<html lang="en">
+<link href="login.css" rel="stylesheet" id="bootstrap-css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+</head>
+
+
+<!--Navbar-->
+<nav class="navbar navbar-expand-lg navbar-light">
+  <img src="logo.png" class="navbar-brand" style="width:150px"/>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+      <a class="nav-item nav-link" href="#">Contact Us</a>
+      </div>
+  </div>
+  </nav>
+
+
+<!--Form-->
+<div class="wrapper fadeInDown" style="margin-left: 500px;">
+    <div id="formContent">
+      <h1 style="font-family: Poppins, sans-serif; padding-bottom: 25px; padding-top:-100px;">Welcome!</h1>
+      <form>
+        <p>Username/Email</p>
+        <input type="text" id="Username" class="fadeIn second" name="uploadstyle" placeholder="Username">
+        <p>Password</p>
+        <input type="password" id="Password" class="fadeIn second" name="uploadstyle" placeholder="Password">
+        <p><input type="checkbox" id="PassVis" onclick="showPass()"> Show Password</p>
+        <input type="button" class= "login" class="fadeIn fourth" value="Sign In">      
+        <p>Not a member yet?</p>
+        <input type="button" class= "signUp" class="fadeIn fourth" value="Sign Up">      
+
+      </form>
+    </div>
+</div>
+<script>
+  function showPass() {
+  var x = document.getElementById("Password");
+  if (x.type === "password") {
+    x.type = "text";
+  } else {
+    x.type = "password";
+  }
+}
+</script>
+</html>
