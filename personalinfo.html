@@ -1,69 +1,84 @@
 <!DOCTYPE html>
+<head>
 <html lang="en">
-<link href="loginTestvis.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<style>
-  .slidecontainer {
-    width: 100%;
-  }
-  
-  .slider {
-    -webkit-appearance: none;
-    width: 100%;
-    height: 25px;
-    background: #d3d3d3;
-    outline: none;
-    opacity: 0.7;
-    -webkit-transition: .2s;
-    transition: opacity .2s;
-  }
-  
-  .slider:hover {
-    opacity: 1;
-  }
-  
-  .slider::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 25px;
-    height: 25px;
-    background: #ff8635;
-    cursor: pointer;
-  }
-  
-  .slider::-moz-range-thumb {
-    width: 25px;
-    height: 25px;
-    background: #ff8635;
-    cursor: pointer;
-  }
-  </style>
+<link href="personalinfo.css" rel="stylesheet" id="bootstrap-css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+</head>
+
+
+<!--Navbar-->
+<nav class="navbar navbar-expand-lg navbar-light">
+  <img src="logo.png" class="navbar-brand" style="width:150px"/>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+      <a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
+      <a class="nav-item nav-link" href="#">Profile</a>
+      <a class="nav-item nav-link" href="#">Settings</a>
+      <a class="nav-item nav-link" href="#">Contact Us</a>
+      </div>
+  </div>
+  </nav>
+
+
+<!--Form-->
 <div class="wrapper fadeInDown">
-  <div id="formContent">
-    <form>
-      <p>Current Weight</p>
-      <input type="text" id="info" class="fadeIn second" name="uploadstyle" placeholder="Weight">
-      <p>Goal Weight</p>
-      <input type="text" id="info" class="fadeIn second" name="uploadstyle" placeholder="Weight">
-      <p>Body Image</p>
-      <label class="myLabel">
-          <input type="file" accept="image/*" onChange="validateAndUpload(this);" multiple/>
-          <span>Image</span>
-      </label>
-      <input type="range" min="1" max="12" value="6" class="slider" id="myRange">
-      <p>Cutting/Bulking period: <span id="demo"></span> months</p>
-      <input type="upload" class="fadeIn fourth" value="Calculate">      
-    </form>
-    <script>
-      var slider = document.getElementById("myRange");
-      var output = document.getElementById("demo");
-      output.innerHTML = slider.value;
-      
-      slider.oninput = function() {
-        output.innerHTML = this.value;
-      }
+  <div>
+    <div id="formContent">
+      <h1 style="font-family: Poppins, sans-serif; padding-bottom: 25px; padding-top:-100px;">Personal Information</h1>
+      <form>
+        <p>Current Weight</p>
+        <input type="number" id="Current" class="fadeIn second" name="uploadstyle" placeholder="Current">
+        <p>Goal Weight</p>
+        <input type="number" id="Target" class="fadeIn second" name="uploadstyle" placeholder="Target">
+        <label class="myLabel">
+            <input type="file" accept="image/*" onChange="validateAndUpload(this);" multiple/>
+            <span>Body Image</span>
+        </label>
+        <input type="range" min="1" max="52" value="1" class="slider" id="Range">
+        <p style="font-family: Poppins, sans-serif">Cutting/Bulking Period: <span id="Output"></span> weeks</p>
+        <input type="button" class= "calculate" class="fadeIn fourth" onclick="calc()" value="Calculate">      
+        <p style="font-family: Poppins, sans-serif"><var id="val"></var></p>
+      </form>
+
+      <!--For working the slider-->
+      <script>
+        var slider = document.getElementById("Range");
+        var output = document.getElementById("Output");
+        output.innerHTML = slider.value;
+        
+        slider.oninput = function() {
+          output.innerHTML = this.value;
+        }
       </script>
+
+      <!--Caloric intake calculation -->
+      <script>
+        function calc(){
+          var cur = document.getElementById("Current").value;
+          var tar = document.getElementById("Target").value;
+          var weeks = document.getElementById("Range").value;
+          if(weeks == 0){
+            var calc = document.getElementById("val");
+            calc.innerHTML = "Please enter a valid number of weeks!";
+            return;
+          }
+          var calc = document.getElementById("val");
+            if(cur > tar){
+              calc.innerHTML = (cur-tar)/weeks + " pounds lost per week. Consider a diet under 2000 Calories a day, maintaining a 1x of your body weight in protein intake.";
+            }
+            else if(cur < tar){
+              calc.innerHTML = (tar-cur)/weeks + " pounds gained per week. Consider a diet over 2000 Calories a day, maintining 1.5x  of your body weight in protein intake.";
+            }
+            else if(cur = tar){
+              calc.innerHTML = "You have reached your target weight. Congradulations!";
+            }
+        }
+      </script>
+    </div>
   </div>
 </div>
 </html>
