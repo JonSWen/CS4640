@@ -1,0 +1,57 @@
+<div class="container">
+
+
+<hr/>
+
+
+<form #orderForm="ngForm" (ngSubmit)="onSubmit(orderForm.value)">
+  <div class="form-group">
+    <label>Food </label>
+    <input type="text" class="form-control" name="food"[(ngModel)]="orderModel.food">
+  </div>
+
+  <div class="form-group">
+    <label>Calories </label>
+    <input type="number" class="form-control" name="calories" [(ngModel)]="orderModel.calories">
+  </div>
+
+  <div class="form-group">
+    <label>Protein (grams) </label> 
+    <input type="number" class="form-control" name="protein" [(ngModel)]="orderModel.protein">
+  </div>
+
+  <div class="form-group">
+    <label>Carbohydrates (grams) </label> 
+    <input type="number" class="form-control" name="carbohydrates" [(ngModel)]="orderModel.carbohydrates">
+  </div>
+
+  <div class="form-group">
+    <label>Fat (grams) </label> 
+    <input type="number" class="form-control" name="fat" [(ngModel)]="orderModel.fat">
+  </div>
+
+  <button class="btn btn-primary"
+          (click)="confirmOrder(orderForm.value)"
+          title="always enabled">Add</button>
+
+  &nbsp;&nbsp;&nbsp;&nbsp;
+
+</form>
+
+<hr/>
+<h3>Food Entry Details</h3>
+  <font color="green" style="font-style:italic">
+    <!-- If confirm_msg is not empty, display confirm message, otherwise, display default text -->
+    {{ (confirm_msg.length > 0)? confirm_msg : '' }}</font> <br/>
+<hr/>
+
+Response from PHP:<br/>
+  <font color="green" style="font-style:italic">
+    <!-- If confirm_msg is not empty, display the response from the PHP backend. -->
+  {{ (confirm_msg.length > 0)? (responsedata | json) : 'Display response from PHP backend' }}
+  </font>
+
+</div>
+
+
+<br/><br/><br/>
