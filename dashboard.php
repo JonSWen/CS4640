@@ -1,5 +1,18 @@
 <!--Created by Margaret Chen (mdc5bv), working with Jonathan Wen (jsw2dg) on CS4640 Web PL project-->
-<!doctype html>
+<?php 
+  session_start(); 
+
+  if (!isset($_SESSION['username'])) {
+  	$_SESSION['msg'] = "You must log in first";
+  	header('location: login.php');
+  }
+  if (isset($_GET['logout'])) {
+  	session_destroy();
+  	unset($_SESSION['username']);
+  	header("location: login.php");
+  }
+?>
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
@@ -21,9 +34,9 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
-        <a class="nav-item nav-link active" href="dashboard.html">Home <span class="sr-only">(current)</span></a>
+        <a class="nav-item nav-link active" href="dashboard.php">Home <span class="sr-only">(current)</span></a>
         <a class="nav-item nav-link" href="personalinfo.html">Profile</a>
-        <a class="nav-item nav-link" href="#">Settings</a>
+        <a class="nav-item nav-link" href="form.php">Upload</a>
         <a class="nav-item nav-link" href="#">Contact Us</a>
         </div>
     </div>
@@ -52,19 +65,14 @@
     </div>
 
     <?php 
-        include('./connectdb.php');
-    
-        $query = "select * from foodentry";
-        $statement = $db->prepare($query);
-        $statement->execute();
-        $rows = $statement->fetchAll();
-        $countArray = array(0, 0, 0);
-        for ($row = 0; $row < count($rows); $row +=1) {
-            for ($entry = 3; $entry < 6; $entry += 1) {
-                $countArray[$entry - 3] += $rows[$row][$entry];
+
+         $countArray = array(0, 0, 0);   
+         for ($row = 0; $row < count($rows); $row +=1) {
+             for ($entry = 3; $entry < 6; $entry += 1) {
+                 $countArray[$entry - 3] += $rows[$row][$entry];
             }
-        }
-        echo $countArray[1];
+         }
+         echo $countArray[1];
     ?>
     <div class="col-4">
         <!----------For pie chart---------->
