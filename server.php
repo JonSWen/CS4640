@@ -66,29 +66,53 @@ if (isset($_POST['login_user'])) {
         }
     }
   }
-  
-  if (isset($_POST['action'])) {
-    $fooddesc = mysqli_real_escape_string($db, $_POST['fooddesc']);
-    $calories = mysqli_real_escape_string($db, $_POST['calories']);
-    $protein = mysqli_real_escape_string($db, $_POST['protein']);
-    $carbs = mysqli_real_escape_string($db, $_POST['carbs']);
-    $fat = mysqli_real_escape_string($db, $_POST['fat']);
-    $username = $_SESSION['username'];
+
+  //header('Access-Control-Allow-Origin: http://localhost:4200');
+ header('Access-Control-Allow-Origin: *');
+ header('Access-Control-Allow-Headers: X-Requested-With, Content-Type, Origin, Authorization, Accept, Client-Security-Token, Accept-Encoding');
+ header('Access-Control-Max-Age: 1000');
+ header('Access-Control-Allow-Methods: POST, GET, OPTIONS, DELETE, PUT');
  
-    $query = "INSERT INTO foodentyr (userID, food, calories, protein, carbs, fat) 
-          VALUES('$username', '$fooddesc', '$calories', '$protein','$carbs','$fat')";
-    if (mysqli_query($db, $query)){
-      http_response_code(201);
-      $foodentry = [
-        'food' => $foodesc,
-        'calories' => $calories,
-        'protein' => $protein,
-        'carbs' => $carbs,
-        'fat' => $fat
-      ];
-      echo($foodentry);
-    }
+  // retrieve data from the request
+  $postdata = file_get_contents("php://input");
   
-    header('location: dashboard.php');
+  // Process data
+  // (this example simply extracts the data and restructures them back)
+
+  // Extract json format to PHP array
+  $request = json_decode($postdata);
+
+  $data = [];
+  // $data[0]['length'] = $content_length;
+  foreach ($request as $k => $v)
+  {
+    $data[0]['post_'.$k] = $v;
   }
+  
+
+  $fooddesc = mysqli_real_escape_string($db, $data[0]['post_food']);
+  $calories = mysqli_real_escape_string($db, $data[0]['post_calories']);
+  $protein = mysqli_real_escape_string($db, $data[0]['post_protein']);
+  $carbs = mysqli_real_escape_string($db, $data[0]['post_carbohydrates']);
+  $fat = mysqli_real_escape_string($db, $data[0]['post_fat']);
+  $username = $_SESSION['username'];
+
+  $query = "INSERT INTO foodentyr (userID, food, calories, protein, carbs, fat) 
+        VALUES('$username', '$fooddesc', '$calories', '$protein','$carbs','$fat')";
+  if (mysqli_query($db, $query)){
+    http_response_code(201);
+    $foodentry = [
+      'food' => $foodesc,
+      'calories' => $calories,
+      'protein' => $protein,
+      'carbs' => $carbs,
+      'fat' => $fat
+    ];
+  }
+
+
+  // Send response (in json format) back the front end
+  echo json_encode(['content'=>$data]);
+
+ 
   ?>
