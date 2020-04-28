@@ -10,6 +10,7 @@ import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http'
 })
 export class AppComponent {
 
+
   constructor(private http: HttpClient) {   }
 
   // Let's create a property to store a response from the back end
@@ -24,7 +25,7 @@ export class AppComponent {
 
   confirmOrder(data) {
      console.log(data);
-     this.confirm_msg = 'You entered ' + data.food + ', which has ' + data.calories + ' calories, ' + data.protein + ' grams of protein, ' + data.carbohydrates + ' grams of carbohydrates, and ' + data.fat + ' grams of fat.';
+     this.confirm_msg = 'You entered ' + data.food + ' , which has ' + data.calories + ' calories, ' + data.protein + ' grams of protein, ' + data.carbohydrates + ' grams of carbohydrates, and ' + data.fat + ' grams of fat.';
   }
 
 
@@ -41,7 +42,7 @@ export class AppComponent {
      // To send a GET request, use the concept of URL rewriting to pass data to the backend
      // this.http.get<Order>('http://localhost/cs4640/inclass11/ngphp-get.php?str='+params)
      // To send a POST request, pass data as an object
-     this.http.post<Order>('http://localhost/ngphp-post.php', params)
+     this.http.post<Order>('http://localhost/server.php', params)
      .subscribe((data) => {
           // Receive a response successfully, do something here
           // console.log('Response from backend ', data);
