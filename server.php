@@ -1,3 +1,6 @@
+<!-- Created by Margaret Chen (mdc5bv) and Jonathan Wen (jsw2dg) for CS4640 Web PL project -->
+
+
 <?php
 session_start();
 $username = "";
