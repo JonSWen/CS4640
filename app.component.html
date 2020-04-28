@@ -7,7 +7,7 @@
 <form #orderForm="ngForm" (ngSubmit)="onSubmit(orderForm.value)">
   <div class="form-group">
     <label>Food </label>
-    <input type="text" class="form-control" name="food"[(ngModel)]="orderModel.food">
+    <input type="text" class="form-control" name="food" [(ngModel)]="orderModel.food">
   </div>
 
   <div class="form-group">
@@ -30,7 +30,8 @@
     <input type="number" class="form-control" name="fat" [(ngModel)]="orderModel.fat">
   </div>
 
-  <button class="btn btn-primary"
+  <!--  using [ngClass] attribute directive -->
+  <button [ngClass]="['btn', 'btn-primary']"
           (click)="confirmOrder(orderForm.value)"
           title="always enabled">Add</button>
 
@@ -40,8 +41,10 @@
 
 <hr/>
 <h3>Food Entry Details</h3>
-  <font color="green" style="font-style:italic">
+  <!--  using [ngStyle] attribute directive -->
+  <font [ngStyle]="{'font-style': 'italic', 'color': 'green'}">
     <!-- If confirm_msg is not empty, display confirm message, otherwise, display default text -->
+    <!-- using ngIf structural directive -->
     {{ (confirm_msg.length > 0)? confirm_msg : '' }}</font> <br/>
 <hr/>
 
@@ -53,5 +56,17 @@ Response from PHP:<br/>
 
 </div>
 
+<br/><br/><br/>
+
+<!-- use of ngSwitch -->
+Nutritional facts I want to learn more about:
+<select ng-model="myVar">
+  <option value="pro">Protein
+  <option value="carb">Carbohydrates
+  <option value="fa">Fat
+</select>
 
 <br/><br/><br/>
+
+
+
