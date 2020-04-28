@@ -37,7 +37,7 @@ if (isset($_POST['reg_user'])) {
   	mysqli_query($db, $query);
   	$_SESSION['username'] = $username;
   	$_SESSION['success'] = "You are now logged in";
-  	header('location: index.php');
+  	header('location: dashboard.php');
   }
 }
 
@@ -60,11 +60,35 @@ if (isset($_POST['login_user'])) {
         if (mysqli_num_rows($results) == 1) {
           $_SESSION['username'] = $username;
           $_SESSION['success'] = "You are now logged in";
-          header('location: index.php');
+          header('location: dashboard.php');
         }else {
             array_push($errors, "Wrong username/password combination");
         }
     }
   }
   
+  if (isset($_POST['action'])) {
+    $fooddesc = mysqli_real_escape_string($db, $_POST['fooddesc']);
+    $calories = mysqli_real_escape_string($db, $_POST['calories']);
+    $protein = mysqli_real_escape_string($db, $_POST['protein']);
+    $carbs = mysqli_real_escape_string($db, $_POST['carbs']);
+    $fat = mysqli_real_escape_string($db, $_POST['fat']);
+    $username = $_SESSION['username'];
+ 
+    $query = "INSERT INTO foodentyr (userID, food, calories, protein, carbs, fat) 
+          VALUES('$username', '$fooddesc', '$calories', '$protein','$carbs','$fat')";
+    if (mysqli_query($db, $query)){
+      http_response_code(201);
+      $foodentry = [
+        'food' => $foodesc,
+        'calories' => $calories,
+        'protein' => $protein,
+        'carbs' => $carbs,
+        'fat' => $fat
+      ];
+      echo($foodentry);
+    }
+  
+    header('location: dashboard.php');
+  }
   ?>
