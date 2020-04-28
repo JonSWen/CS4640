@@ -1,3 +1,5 @@
+// Created by Margaret Chen (mdc5bv), working with Jonathan Wen (jsw2dg) on CS4640 Web PL project
+
 import { Component } from '@angular/core';
 import { Order } from './order';
 
